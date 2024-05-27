@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import keycloak from "./config/keycloak";
 import LoginButton from "./components/LoginButton";
+import LogoutButton from "./components/LogoutButton";
 import PrivateRoute from "./routes/PrivateRoute";
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
     <Router>
       <div>
         <h1>Keycloak SSO</h1>
+        {keycloak.authenticated ? <LogoutButton /> : null}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/protected" element={<PrivateRoute />}>
@@ -65,6 +67,7 @@ const Home = () => {
 const ProtectedComponent = () => (
   <div>
     <h2>Protected Content</h2>
+    <p>This content is protected and requires authentication.</p>
   </div>
 );
 
